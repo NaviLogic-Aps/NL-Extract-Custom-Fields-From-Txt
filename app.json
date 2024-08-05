@@ -1,0 +1,35 @@
+{
+  "id": "f5e832c7-db0f-4a49-a4a2-11a98ff2f57b",
+  "name": "NL Extract Custom Fields",
+  "publisher": "NaviLogic",
+  "version": "1.0.0.74",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {           
+     "appId": "ac762be1-e90f-4a72-b519-612a5e3ddc2e",
+      "name": "OIOUBL",
+      "publisher": "Microsoft",
+      "version": "14.41.49238.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 70550,
+      "to": 70599
+    }
+  ],
+  "showMyCode": true,
+  "runtime": "3.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
