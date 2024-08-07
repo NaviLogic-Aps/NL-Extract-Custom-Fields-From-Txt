@@ -1,0 +1,56 @@
+{
+  "name": "navilogicRules",
+  "description": "rules",
+  "rules": [
+    {
+      "id": "AA0241",
+      "action": "Error",
+      "justification": "Remnant from Objects, we do not want that."
+    },
+    {
+      "id": "AA0215",
+      "action": "Hidden",
+      "justification": "We do not want TR in file names."
+    },
+    {
+      "id": "AS0084",
+      "action": "Hidden",
+      "justification": "We are developing customer's extension which are in range 50 000 - 90 000"
+    },
+    {
+      "id": "AA0008",
+      "action": "Error",
+      "justification": "Remnant from Objects, we do not want that."
+    },
+    {
+      "id": "AS0092",
+      "action": "Hidden",
+      "justification": "We do not use that."
+    },
+    {
+      "id": "AS0052",
+      "action": "Hidden",
+      "justification": "Not for marketplace."
+    },
+    {
+      "id": "AS0051",
+      "action": "Hidden",
+      "justification": "Not for marketplace."
+    },
+    {
+      "id": "AS0015",
+      "action": "Hidden",
+      "justification": "Dont need translations for internal use development."
+    },
+    {
+      "id": "AA0218",
+      "action": "Hidden",
+      "justification": "Dont need tooltips for internal use development."
+    },
+    {
+      "id": "AA0005",
+      "action": "Hidden",
+      "justification": "We do like begin..end sometimes for clarity."
+    }
+  ]
+}

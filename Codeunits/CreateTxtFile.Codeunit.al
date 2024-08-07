@@ -9,31 +9,28 @@ codeunit 70550 "NL Create Txt File"
     */
     trigger OnRun()
     var
-        AtLeastOneTable: Boolean;
+        TempExcelBuffer: Record "Excel Buffer" temporary;
+        InStream: InStream;
+        Index: Integer;
+        NoOfFields: Integer;
+        NoOfTables: Integer;
+        ExcelFileName_Lbl: Label 'Custom fields_%1_%2', Comment = '%1 = Date, %2 = User ID';
+        ListWithTablesId: List of [Text];
+        ListWithTablesName: List of [Text];
         CurrentTableId: Text;
         CurrentTableName: Text;
         FieldName: Text;
         FieldNo: Text;
+        FieldsText: Text;
         FieldType: Text;
         FileName: Text;
-        FieldsText: Text;
-        Index: Integer;
-        InStream: InStream;
-        InStream2: InStream;
-        ListWithTablesId: List of [Text];
-        ListWithTablesName: List of [Text];
         NewOneLine: Text;
         NewOneLineAux: Text;
-        NoOfFields: Integer;
-        NoOfTables: Integer;
         OneLine: Text;
-        TempExcelBuffer: Record "Excel Buffer" temporary;
-        ExcelFileName: Label 'Custom fields_%1_%2';
     begin
         FieldsText := 'FIELDS';
         NoOfTables := 0;
         NoOfFields := 0;
-        AtLeastOneTable := false;
 
         TempExcelBuffer.Reset();
         TempExcelBuffer.DeleteAll();
@@ -98,8 +95,9 @@ codeunit 70550 "NL Create Txt File"
                                             NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
                                             if StrPos(NewOneLineAux, ';') > 0 then
                                                 FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux))
-                                            else if StrPos(NewOneLineAux, '}') > 0 then
-                                                FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
+                                            else
+                                                if StrPos(NewOneLineAux, '}') > 0 then
+                                                    FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
                                         end;
                                     end;
                                 end;
@@ -117,7 +115,6 @@ codeunit 70550 "NL Create Txt File"
 
                                     if ListWithTablesId.Contains(CurrentTableId) = false then
                                         ListWithTablesId.Add(CurrentTableId);
-                                    AtLeastOneTable := true;
                                 end;
                             end;
                         end;
@@ -129,7 +126,7 @@ codeunit 70550 "NL Create Txt File"
         TempExcelBuffer.CreateNewBook('Custom fields');
         TempExcelBuffer.WriteSheet('Custom fields', CompanyName, UserId);
         TempExcelBuffer.CloseBook();
-        TempExcelBuffer.SetFriendlyFilename(StrSubstNo(ExcelFileName, CurrentDateTime, UserId));
+        TempExcelBuffer.SetFriendlyFilename(StrSubstNo(ExcelFileName_Lbl, CurrentDateTime, UserId));
         TempExcelBuffer.OpenExcel();
     end;
 }

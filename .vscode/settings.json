@@ -1,0 +1,67 @@
+{
+    "al.backgroundCodeAnalysis": "Project",
+    "al.browser": "Chrome",
+    "al.codeAnalyzers": [
+        "${AppSourceCop}","${CodeCop}","${PerTenantExtensionCop}","${UICop}"
+        //"${analyzerFolder}C:/Users/DenisRaslavsky(NaviL/Documents/CodeCop/BusinessCentral.LinterCop.dll"
+    ],
+    "al.enableCodeActions": true,
+    "al.enableCodeAnalysis": true,
+    "al.incrementalBuild": true,
+    "al.inlayhints.parameterNames.enabled": true,
+    "al.inlayhints.functionReturnTypes.enabled": true,
+    "al.ruleSetPath": "navilogicRules.json",
+
+    "git.pruneOnFetch": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "alOutline.codeActionsOnSave": ["SortProperties", "SortVariables","SortTriggers"],
+    "alOutline.codeCleanupActions": [
+        "AddApplicationAreas",
+        "AddEnumValuesCaptions",
+        "AddMissingParentheses",
+        "AddObjectCaptions",
+        "AddTableFieldCaptions",
+        "AddToolTips",
+        "CollapseEmptyBrackets",
+        "ConvertObjectIdsToNames",
+        "FixIdentifiersCase",
+        "FixKeywordsCase",
+        "FormatDocument",
+        "LockRemovedFieldCaptions",
+        "MakeFlowFieldsReadOnly",
+        "OneStatementPerLine",
+        "RefreshToolTips",
+        "RemoveBeginEnd",
+        "RemoveEmptyLines",
+        "RemoveEmptySections",
+        "RemoveEmptyTriggers",
+        "RemoveRedundantAppAreas",
+        "RemoveRedundantDataClassification",
+        "RemoveStrSubstNoFromError",
+        "RemoveUnusedVariables",
+        "RemoveWithStatements",
+        "SortProperties",
+        "SortVariables",
+        "SortTriggers",
+        "TrimTrailingWhitespace"
+    ],
+    "alOutline.defaultRemoveEmptyTriggersSettings": {"ignoreComments": true, "removeSubscribers": true, "removeTriggers": true},
+    "alOutline.defaultRemoveUnusedVariablesSettings": {"removeGlobalVariables": true, "removeLocalVariables": true, "removeProtectedGlobalVariables": true,"removeLocalMethodParameters": false},
+    "alOutline.fixCaseRemovesQuotesFromDataTypeIdentifiers": true,
+    "alOutline.fixCaseRemovesQuotesFromNonDataTypeIdentifiers": true,
+    "alOutline.reuseToolTipsFromDependencies": ["*"],
+    "alOutline.triggersSortMode":"NaturalOrder",
+
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.ObjectNamePrefix": "NL ", //Space is intentionally in there //TBC for Tools4BC //TR for Time Registration //NL for NaviLogic
+    "CRS.OnSaveAlFileAction": "Rename",
+    "CRS.RenameWithGit": true,
+    "CRS.RemovePrefixFromFilename": true
+
+    //"linterCop.autoDownload":true,
+    //"linterCop.load-pre-releases": true
+}

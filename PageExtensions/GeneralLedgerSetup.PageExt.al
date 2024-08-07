@@ -14,9 +14,9 @@ pageextension 70550 "NL General Ledger Setup" extends "General Ledger Setup"
 
                 trigger OnAction()
                 var
-                    ApprovalsMgmt: Codeunit "NL Create Txt File";
+                    NLCreateTxtFile: Codeunit "NL Create Txt File";
                 begin
-                    ApprovalsMgmt.Run();
+                    NLCreateTxtFile.Run();
                 end;
             }
         }
