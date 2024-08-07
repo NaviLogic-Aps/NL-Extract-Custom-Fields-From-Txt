@@ -78,11 +78,11 @@ codeunit 70550 "NL Create Txt File"
                             FieldNo := '';
                             NewOneLineAux := OneLine;
                             NewOneLine := DELCHR(OneLine, '=', ' ');
-                            if (NewOneLine[2] in ['5', '6', '7', '8', '9']) and (NewOneLine[1] = '{') then begin
+                            if (NewOneLine[2] in ['5', '6', '7', '8', '9']) and (NewOneLine[1] = '{') then
                                 if StrPos(NewOneLine, ';;') > 0 then begin
                                     FieldNo := DelStr(NewOneLine, StrPos(NewOneLine, ';;'), StrLen(NewOneLine));
                                     FieldNo := DelStr(FieldNo, 1, 1);
-                                    if StrLen(FieldNo) >= 5 then begin
+                                    if StrLen(FieldNo) >= 5 then
                                         if ((NewOneLine[2] = '5') and (StrLen(FieldNo) = 5)) or
                                            ((NewOneLine[2] = '6') and (StrLen(FieldNo) = 5)) or
                                            ((NewOneLine[2] = '7') and (StrLen(FieldNo) = 5)) or
@@ -99,23 +99,21 @@ codeunit 70550 "NL Create Txt File"
                                                 if StrPos(NewOneLineAux, '}') > 0 then
                                                     FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
                                         end;
-                                    end;
                                 end;
 
-                                if (StrLen(FieldName) > 0) and (StrLen(FieldType) > 0) and (StrLen(CurrentTableName) > 0) then begin
-                                    if ListWithTablesName.Contains(CurrentTableName) = false then
-                                        ListWithTablesName.Add(CurrentTableName);
+                            if (StrLen(FieldName) > 0) and (StrLen(FieldType) > 0) and (StrLen(CurrentTableName) > 0) then begin
+                                if ListWithTablesName.Contains(CurrentTableName) = false then
+                                    ListWithTablesName.Add(CurrentTableName);
 
-                                    TempExcelBuffer.NewRow();
-                                    TempExcelBuffer.AddColumn(CurrentTableId, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Number);
-                                    TempExcelBuffer.AddColumn(CurrentTableName, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                                    TempExcelBuffer.AddColumn(FieldNo, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Number);
-                                    TempExcelBuffer.AddColumn(FieldName, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
-                                    TempExcelBuffer.AddColumn(FieldType, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+                                TempExcelBuffer.NewRow();
+                                TempExcelBuffer.AddColumn(CurrentTableId, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Number);
+                                TempExcelBuffer.AddColumn(CurrentTableName, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+                                TempExcelBuffer.AddColumn(FieldNo, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Number);
+                                TempExcelBuffer.AddColumn(FieldName, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
+                                TempExcelBuffer.AddColumn(FieldType, false, '', false, false, false, '', TempExcelBuffer."Cell Type"::Text);
 
-                                    if ListWithTablesId.Contains(CurrentTableId) = false then
-                                        ListWithTablesId.Add(CurrentTableId);
-                                end;
+                                if ListWithTablesId.Contains(CurrentTableId) = false then
+                                    ListWithTablesId.Add(CurrentTableId);
                             end;
                         end;
                     end;
