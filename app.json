@@ -12,7 +12,7 @@
   "logo": "",
   "dependencies": [
     {           
-     "appId": "ac762be1-e90f-4a72-b519-612a5e3ddc2e",
+     "id": "ac762be1-e90f-4a72-b519-612a5e3ddc2e",
       "name": "OIOUBL",
       "publisher": "Microsoft",
       "version": "14.41.49238.0"
