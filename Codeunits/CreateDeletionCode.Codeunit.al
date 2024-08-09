@@ -56,9 +56,8 @@ codeunit 70551 "NL Create Deletion Code"
         Crlf[2] := 10;
 
         GeneratedDateTime := CURRENTDATETIME;
-        if Evaluate(GeneratedDate, Format(GeneratedDateTime)) then;
-        if Evaluate(GeneratedTime, Format(GeneratedDateTime)) then;
-
+        GeneratedDate := DT2Date(GeneratedDateTime);
+        GeneratedTime := DT2Time(GeneratedDateTime);
         RecordCount := ListOfRecords.Count;
         BaseCode := 'OBJECT Codeunit 59999 NL Delete Custom Fields' + Crlf +
                     '{' + Crlf +
@@ -78,6 +77,7 @@ codeunit 70551 "NL Create Deletion Code"
                     '            Fields@1000000003 : ARRAY [%2] OF Integer;' + Crlf +
                     '            Index@1000000004 : Integer;' + Crlf +
                     '            TempVariant@1000000005 : Variant;' + Crlf +
+                    '            TempBlob@1000000006 : Record 99008535;' + Crlf +
                     '          BEGIN' + Crlf +
                     '            %1' + Crlf +
                     '' + Crlf +
@@ -94,11 +94,16 @@ codeunit 70551 "NL Create Deletion Code"
                     '                  FieldRef.VALUE:=0DT;' + Crlf +
                     '                  ''Time'':' + Crlf +
                     '                  FieldRef.VALUE:=0T;' + Crlf +
+                    '                  ''BLOB'': BEGIN' + Crlf +
+                    '                  CLEAR(TempBlob);' + Crlf +
+                    '                  FieldRef.VALUE:=TempBlob.Blob;' + Crlf +
+                    '                  END' + Crlf +
                     '                  ELSE' + Crlf +
                     '                    FieldRef.VALUE := TempVariant;' + Crlf +
                     '                END;' + Crlf +
                     '' + Crlf +
-                    '                RecordRef.MODIFY();' + Crlf +
+                    '                IF RecordRef.MODIFY(FALSE) THEN' + Crlf +
+                    '                  ERROR(''Failed on record: '' + Format(Records[Index]) + '' field: '' + Format(Fields[Index]));' + Crlf +
                     '                RecordRef.CLOSE();' + Crlf +
                     '            END;' + Crlf +
                     '          END;' + Crlf +
@@ -132,9 +137,9 @@ codeunit 70551 "NL Create Deletion Code"
             BaseCode,
             GetFieldDimensionAssignmentText(ListOfFields, ListOfRecords),
             RecordCount,
-            Format(GeneratedDate, 2048, '<Closing><Month,2>/<Day,2>/<Year>'), //08/07/24
-            Format(GeneratedTime, 2048, '<Hours12>:<Minutes,2>:<Seconds,2><Second dec.> <AM/PM>'), //[ 4:14:47 PM]
-            'NL1.00:' + Crlf + Format(GeneratedDate, 2048, '<Year>.<Month,2>.<Day,2>') + 'NL (NaviLogic)'
+            Format(GeneratedDate, 0, 0), //08/07/24
+            '[ ' + Format(GeneratedTime, 0, 0) + ' ]', //[ 4:14:47 PM]
+            'NL1.00:' + Format(GeneratedDateTime, 0, '<Year>.<Month,2>.<Day,2>') + ':NL (NaviLogic)'
         //NL1.00:2024.04.18:DPC (Dennis Puggaard Christensen)
         );
 
@@ -154,6 +159,7 @@ codeunit 70551 "NL Create Deletion Code"
     begin
         Crlf[1] := 13;
         Crlf[2] := 10;
+        DimensionAssignmentText += Crlf;
         for Index := 1 to ListOfRecords.Count do begin
             DimensionAssignmentText +=
                 '            Records[' + Format(Index) + '] := ' + ListOfRecords.Get(Index) + ';' + Crlf +
