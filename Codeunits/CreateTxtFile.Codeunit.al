@@ -2,10 +2,10 @@ codeunit 70550 "NL Create Txt File"
 {
     /*
     How to use this extenion (BC14 extension):
-    1. Export all standard tables from NAVision as .txt file
-    2. Run this extension, by going to "General Ledger Stup" page and pressing "Generate Codeunit [NL]" button from Home actions area
+    1. Export all tables from NAVision as .txt file
+    2. Run this extension, by going to "General Ledger Stup" page and pressing "Generate Excel File from Objects Txt [NL]" button from Home actions area
     3. When it's requesting from you the .txt file, you need to select the exported one at point 1.
-    4. When execution is ready it automatically will download the generated excel file that contains custom fields
+    4. When execution is ready it automatically will download the generated excel file that contains custom fields from standard tables and all fields from custom tables
     */
     trigger OnRun()
     var
@@ -107,7 +107,7 @@ codeunit 70550 "NL Create Txt File"
                                                    ((NewOneLine[2] = '7') and (StrLen(FieldNo) = 5)) or
                                                    ((NewOneLine[2] = '8') and (StrLen(FieldNo) = 5)) or
                                                    ((NewOneLine[2] = '9') and (StrLen(FieldNo) = 5)) or
-                                                   ((NewOneLine[2] = '6') and (StrLen(FieldNo) = 7)) then begin
+                                                   (StrLen(FieldNo) > 5) then begin
                                                     NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
                                                     NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
                                                     FieldName := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux));
