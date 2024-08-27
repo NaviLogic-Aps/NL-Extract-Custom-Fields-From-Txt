@@ -97,28 +97,53 @@ codeunit 70550 "NL Create Txt File"
                                                     FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
                                         end;
                                 end else begin
-                                    if (NewOneLine[2] in ['5', '6', '7', '8', '9']) and (NewOneLine[1] = '{') then
-                                        if StrPos(NewOneLine, ';;') > 0 then begin
-                                            FieldNo := DelStr(NewOneLine, StrPos(NewOneLine, ';;'), StrLen(NewOneLine));
-                                            FieldNo := DelStr(FieldNo, 1, 1);
-                                            if StrLen(FieldNo) >= 5 then
-                                                if ((NewOneLine[2] = '5') and (StrLen(FieldNo) = 5)) or
-                                                   ((NewOneLine[2] = '6') and (StrLen(FieldNo) = 5)) or
-                                                   ((NewOneLine[2] = '7') and (StrLen(FieldNo) = 5)) or
-                                                   ((NewOneLine[2] = '8') and (StrLen(FieldNo) = 5)) or
-                                                   ((NewOneLine[2] = '9') and (StrLen(FieldNo) = 5)) or
-                                                   (StrLen(FieldNo) > 5) then begin
-                                                    NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
-                                                    NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
-                                                    FieldName := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux));
-                                                    NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
-                                                    if StrPos(NewOneLineAux, ';') > 0 then
-                                                        FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux))
-                                                    else
-                                                        if StrPos(NewOneLineAux, '}') > 0 then
-                                                            FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
-                                                end;
-                                        end;
+                                    if CurrentTableIdInteger >= 100000 then begin
+                                        if (NewOneLine[2] in ['5', '6', '7', '8', '9']) and (NewOneLine[1] = '{') then
+                                            if StrPos(NewOneLine, ';;') > 0 then begin
+                                                FieldNo := DelStr(NewOneLine, StrPos(NewOneLine, ';;'), StrLen(NewOneLine));
+                                                FieldNo := DelStr(FieldNo, 1, 1);
+                                                if StrLen(FieldNo) >= 5 then
+                                                    if ((NewOneLine[2] = '5') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '6') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '7') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '8') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '9') and (StrLen(FieldNo) = 5)) then begin
+                                                        //    (StrLen(FieldNo) > 5) then begin
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        FieldName := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux));
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        if StrPos(NewOneLineAux, ';') > 0 then
+                                                            FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux))
+                                                        else
+                                                            if StrPos(NewOneLineAux, '}') > 0 then
+                                                                FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
+                                                    end;
+                                            end;
+                                    end else begin
+                                        if (NewOneLine[2] in ['5', '6', '7', '8', '9']) and (NewOneLine[1] = '{') then // tables from range 1..49.999
+                                            if StrPos(NewOneLine, ';;') > 0 then begin
+                                                FieldNo := DelStr(NewOneLine, StrPos(NewOneLine, ';;'), StrLen(NewOneLine));
+                                                FieldNo := DelStr(FieldNo, 1, 1);
+                                                if StrLen(FieldNo) >= 5 then
+                                                    if ((NewOneLine[2] = '5') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '6') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '7') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '8') and (StrLen(FieldNo) = 5)) or
+                                                       ((NewOneLine[2] = '9') and (StrLen(FieldNo) = 5)) or
+                                                        (StrLen(FieldNo) > 5) then begin
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        FieldName := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux));
+                                                        NewOneLineAux := DelStr(NewOneLineAux, 1, StrPos(NewOneLineAux, ';'));
+                                                        if StrPos(NewOneLineAux, ';') > 0 then
+                                                            FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, ';'), StrLen(NewOneLineAux))
+                                                        else
+                                                            if StrPos(NewOneLineAux, '}') > 0 then
+                                                                FieldType := DelStr(NewOneLineAux, StrPos(NewOneLineAux, '}'), StrLen(NewOneLineAux));
+                                                    end;
+                                            end;
+                                    end;
                                 end;
 
                                 if (StrLen(FieldName) > 0) and (StrLen(FieldType) > 0) and (StrLen(CurrentTableName) > 0) then begin
